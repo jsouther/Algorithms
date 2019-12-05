@@ -133,22 +133,24 @@ def bestFit(capacity, weights):
 MAIN FUNCTION
 """          
 capacityWeights = readTestCases('bin.txt')
+CONVERT_TO_MILLISECONDS = 1000
 
 i = 1
 for case in capacityWeights:
-    ticks = time.time_ns()
+    ticks = int(round(time.time() * CONVERT_TO_MILLISECONDS))
+    print(ticks)
     firstFitBins = firstFit(case[0], case[1])
-    firstFitTime = time.time_ns() - ticks
+    firstFitTime = int(round(time.time() * CONVERT_TO_MILLISECONDS)) - ticks
     
-    ticks = time.time_ns()
+    ticks = int(round(time.time() * CONVERT_TO_MILLISECONDS))
     bestFitBins = bestFit(case[0], case[1])
-    bestFitTime = time.time_ns() - ticks
+    bestFitTime = int(round(time.time() * CONVERT_TO_MILLISECONDS)) - ticks
     
-    ticks = time.time_ns()
+    ticks = int(round(time.time() * CONVERT_TO_MILLISECONDS))
     firstFitDecreasingBins = firstFitDecreasing(case[0], case[1])
-    firstFitDecreasingTime = time.time_ns() - ticks
+    firstFitDecreasingTime = int(round(time.time() * CONVERT_TO_MILLISECONDS)) - ticks
 
-    print("Test Case " + str(i) + " First Fit: " + str(firstFitBins) + ", " + str(firstFitTime) + "ns."
-          " First Fit Decreasing: " + str(firstFitDecreasingBins) + ", " + str(firstFitDecreasingTime) + "ns."
-          " Best Fit: " + str(bestFitBins) + ", " + str(bestFitTime) + "ns.")
+    print("Test Case " + str(i) + " First Fit: " + str(firstFitBins) + ", " + str(firstFitTime) + "ms."
+          " First Fit Decreasing: " + str(firstFitDecreasingBins) + ", " + str(firstFitDecreasingTime) + "ms."
+          " Best Fit: " + str(bestFitBins) + ", " + str(bestFitTime) + "ms.")
     i = i + 1
