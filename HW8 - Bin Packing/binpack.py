@@ -1,16 +1,17 @@
-"""
-Created on Mon Dec  2 15:41:48 2019
-
-@author: JSO
-"""
+# Bin Packing
+# Jacob Souther - CS325 HW 8, Problem 1
+# Date: 04-Dec-2019
+# Description: Implementation of first fit, first fit decreasing, and best fit bin packing approximation algorithms
 
 import time
 
+#Bin class. Bins are initialized with a weight of 0 and weight remaining equal to capacity.
 class Bin:
     def __init__(self, capacity):
         self.weight = 0
         self.weightRemaining = capacity
 
+#Merge sort takes an array and sorts it in decreasing order
 def mergeSortDecreasing(array):
 			if len(array) > 1:
 				middle = len(array)//2
@@ -52,6 +53,8 @@ def mergeSortDecreasing(array):
 					j += 1
 					k += 1
 
+#Reads a txt file to retrieve the numnber of test cases, items in each test case, and their weights
+#Returns a list of pairs, first item in the pair is the bin capacity. Second item in the pair is a list of the item's weights
 def readTestCases(fileName):
     with open(fileName, 'r') as inFile:
         numTestCases = int(inFile.readline())
@@ -69,6 +72,7 @@ def readTestCases(fileName):
         
         return testCaseCapacityAndWeights
 
+# Fill bins by first fit. Items are added in order to the first bin they fit. If no bin fits, a new bin is made.
 def firstFit(capacity, weights):
     bins = []
     
@@ -85,6 +89,7 @@ def firstFit(capacity, weights):
             bins[-1].weight = bins[-1].weight + weight
     return len(bins)
 
+# Fill bins by first fit. Items are first sorted in decreasing order and then placed in the same manner as first fit.
 def firstFitDecreasing(capacity, weights):
     mergeSortDecreasing(weights)
     
@@ -103,6 +108,7 @@ def firstFitDecreasing(capacity, weights):
             bins[-1].weight = bins[-1].weight + weight
     return len(bins)
 
+# Items are added in order. Items are placed into the bin which leaves the least amount of leftover space.
 def bestFit(capacity, weights):
     bins = []
     
